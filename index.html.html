@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSFiddle 42875169</title>
+
+  <style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    background: #f6a1bb;
+    color: #111111;
+    font-family:
+        Arial,
+        "Microsoft JhengHei",
+        sans-serif;
+}
+
+
+/* =====================================
+   馬賽克背景
+===================================== */
+
+.mosaic-background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+/* 馬賽克愛心 */
+
+.heart {
+    position: absolute;
+
+    font-family: Arial, sans-serif;
+
+    color: #ef4f7d;
+
+    opacity: 0.28;
+
+    text-shadow:
+        10px 0 #ffffff,
+        20px 0 #ef4f7d,
+        0 10px #ffffff,
+        0 20px #ef4f7d;
+
+    animation:
+        heartMove 5s ease-in-out infinite;
+}
+
+
+/* 不同大小、位置 */
+
+.heart-1 {
+    left: 5%;
+    top: 10%;
+    font-size: 80px;
+    animation-delay: 0s;
+}
+
+.heart-2 {
+    left: 20%;
+    top: 70%;
+    font-size: 50px;
+    animation-delay: 1s;
+}
+
+.heart-3 {
+    left: 40%;
+    top: 8%;
+    font-size: 55px;
+    animation-delay: 2s;
+}
+
+.heart-4 {
+    left: 62%;
+    top: 75%;
+    font-size: 90px;
+    animation-delay: 0.5s;
+}
+
+.heart-5 {
+    left: 82%;
+    top: 12%;
+    font-size: 70px;
+    animation-delay: 1.5s;
+}
+
+.heart-6 {
+    left: 90%;
+    top: 65%;
+    font-size: 45px;
+    animation-delay: 2.5s;
+}
+
+.heart-7 {
+    left: 30%;
+    top: 40%;
+    font-size: 35px;
+    animation-delay: 3s;
+}
+
+.heart-8 {
+    left: 72%;
+    top: 40%;
+    font-size: 45px;
+    animation-delay: 3.5s;
+}
+
+.heart-9 {
+    left: 10%;
+    top: 45%;
+    font-size: 35px;
+    animation-delay: 4s;
+}
+
+.heart-10 {
+    left: 52%;
+    top: 55%;
+    font-size: 40px;
+    animation-delay: 1s;
+}
+
+
+@keyframes heartMove {
+
+    0% {
+        transform:
+            translateY(20px)
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translateY(-45px)
+            rotate(3deg);
+    }
+
+    100% {
+        transform:
+            translateY(20px)
+            rotate(-3deg);
+    }
+}
+
+
+/* =====================================
+   頁面
+===================================== */
+
+.page {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+
+.page.active {
+    display: flex;
+
+    animation:
+        pageAppear 0.7s ease;
+}
+
+
+@keyframes pageAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =====================================
+   第一頁
+===================================== */
+
+.birthday-card {
+
+    position: relative;
+
+    width: 540px;
+    height: 340px;
+
+    max-width: 82vw;
+
+    background: #ffffff;
+
+    border: 7px solid #111111;
+
+    box-shadow:
+        14px 14px 0 #e94f7b,
+        25px 25px 0 #ffb36b;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s,
+        box-shadow 0.25s;
+}
+
+
+/* 卡片裡的馬賽克 */
+
+.birthday-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+
+        linear-gradient(
+            45deg,
+            #f6a1bb 25%,
+            transparent 25%
+        ),
+
+        linear-gradient(
+            -45deg,
+            #ef4f7d 25%,
+            transparent 25%
+        );
+
+    background-size: 35px 35px;
+
+    opacity: 0.18;
+
+    pointer-events: none;
+}
+
+
+.birthday-card:hover {
+
+    transform:
+        translate(-5px, -5px);
+
+    box-shadow:
+        19px 19px 0 #e94f7b,
+        30px 30px 0 #ffb36b;
+}
+
+
+.birthday-card:active {
+
+    transform:
+        translate(4px, 4px);
+
+}
+
+
+.mini-title {
+
+    position: relative;
+
+    color: #e94f7b;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 18px;
+}
+
+
+.birthday-card h1 {
+
+    position: relative;
+
+    font-size: 52px;
+
+    line-height: 0.95;
+
+    color: #111111;
+
+    text-shadow:
+        5px 5px 0 #f6a1bb;
+
+}
+
+
+.big-heart {
+
+    position: relative;
+
+    color: #e94f7b;
+
+    font-size: 45px;
+
+    margin: 12px;
+
+    animation:
+        heartbeat 1.3s infinite;
+}
+
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+
+.mom-name {
+
+    position: relative;
+
+    font-size: 36px;
+
+    font-weight: bold;
+
+    letter-spacing: 8px;
+}
+
+
+.open-card {
+
+    position: absolute;
+
+    bottom: 17px;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    color: #555555;
+}
+
+
+/* 四個馬賽克方塊 */
+
+.pixel {
+
+    position: absolute;
+
+    width: 25px;
+    height: 25px;
+
+    background: #e94f7b;
+
+    z-index: 5;
+}
+
+
+.p-top-left {
+    top: 15px;
+    left: 15px;
+}
+
+.p-top-right {
+    top: 15px;
+    right: 15px;
+}
+
+.p-bottom-left {
+    bottom: 15px;
+    left: 15px;
+}
+
+.p-bottom-right {
+    bottom: 15px;
+    right: 15px;
+}
+
+
+/* =====================================
+   第二頁
+===================================== */
+
+.question-box {
+
+    width: 900px;
+
+    max-width: 90vw;
+
+}
+
+
+.question-box h2 {
+
+    font-size:
+        clamp(38px, 6vw, 72px);
+
+    line-height: 1.35;
+
+    color: #111111;
+
+    text-shadow:
+        5px 5px 0 #ffffff;
+
+    margin-bottom: 45px;
+}
+
+
+.choice-area {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+}
+
+
+.choice {
+
+    width: 190px;
+
+    padding: 20px;
+
+    border: 5px solid #111111;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #111111;
+
+    cursor: pointer;
+
+    box-shadow:
+        8px 8px 0 #111111;
+
+    transition: 0.2s;
+}
+
+
+.choice:hover {
+
+    transform:
+        translate(-4px, -4px);
+
+    box-shadow:
+        12px 12px 0 #111111;
+}
+
+
+.love {
+
+    background: #ff5c87;
+}
+
+
+.no-love {
+
+    background: #ffffff;
+}
+
+
+/* =====================================
+   第三頁
+===================================== */
+
+.message-card {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+}
+
+
+.number-58 {
+
+    font-size:
+        clamp(80px, 12vw, 150px);
+
+    font-weight: 900;
+
+    color: #e94f7b;
+
+    letter-spacing: 12px;
+
+    text-shadow:
+        8px 8px 0 #ffffff,
+        15px 15px 0 #111111;
+
+    margin-bottom: 20px;
+}
+
+
+.main-message {
+
+    font-size:
+        clamp(28px, 4vw, 52px);
+
+    font-weight: bold;
+
+    line-height: 1.5;
+
+    color: #111111;
+
+    text-shadow:
+        3px 3px 0 #ffffff;
+
+    margin-bottom: 35px;
+}
+
+
+.next-button {
+
+    padding: 15px 30px;
+
+    border: 4px solid #111111;
+
+    background: #ffffff;
+
+    color: #111111;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        7px 7px 0 #111111;
+
+    transition: 0.2s;
+}
+
+
+.next-button:hover {
+
+    transform:
+        translate(-3px, -3px);
+
+    box-shadow:
+        10px 10px 0 #111111;
+}
+
+
+/* =====================================
+   第四頁：蛋糕
+===================================== */
+
+.cake-stage {
+
+    position: relative;
+
+    width: 850px;
+
+    max-width: 90vw;
+
+    height: 560px;
+}
+
+
+/* 蛋糕 */
+
+.cake {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 90px;
+
+    width: 420px;
+
+    height: 300px;
+
+    transform:
+        translateX(-50%)
+        translateY(430px);
+
+    opacity: 0;
+}
+
+
+.cake.show {
+
+    animation:
+        cakeComeOut 1.5s
+        cubic-bezier(0.2, 0.8, 0.2, 1)
+        forwards;
+}
+
+
+@keyframes cakeComeOut {
+
+    0% {
+
+        transform:
+            translateX(-50%)
+            translateY(430px);
+
+        opacity: 0;
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+        opacity: 1;
+
+    }
+}
+
+
+/* 蛋糕本體 */
+
+.cake-body {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 45px;
+
+    transform:
+        translateX(-50%);
+
+    width: 340px;
+
+    height: 145px;
+
+    background: #ff7096;
+
+    border: 6px solid #111111;
+
+    box-shadow:
+        10px 10px 0 #111111;
+}
+
+
+/* 蛋糕上的白色馬賽克條 */
+
+.cake-body::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 38px;
+
+    width: 100%;
+
+    height: 10px;
+
+    background: #ffffff;
+}
+
+
+.cake-body::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 90px;
+
+    width: 100%;
+
+    height: 10px;
+
+    background: #ffffff;
+}
+
+
+/* 蛋糕頂部 */
+
+.cake-top {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 170px;
+
+    transform:
+        translateX(-50%);
+
+    width: 360px;
+
+    height: 65px;
+
+    background: #fff0f4;
+
+    border: 6px solid #111111;
+
+    border-radius: 50%;
+}
+
+
+/* 奶油 */
+
+.cake-cream {
+
+    position: absolute;
+
+    width: 55px;
+    height: 55px;
+
+    background: #ffffff;
+
+    border: 4px solid #111111;
+
+    border-radius: 50%;
+
+}
+
+
+.cream-1 {
+    left: 55px;
+    top: 5px;
+}
+
+.cream-2 {
+    left: 150px;
+    top: 5px;
+}
+
+.cream-3 {
+    right: 55px;
+    top: 5px;
+}
+
+
+/* 蛋糕盤 */
+
+.cake-plate {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 20px;
+
+    transform:
+        translateX(-50%);
+
+    width: 430px;
+
+    height: 35px;
+
+    background: #ffffff;
+
+    border: 6px solid #111111;
+
+    border-radius: 50%;
+}
+
+
+/* 蛋糕上的馬賽克方塊 */
+
+.cake-pixel {
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    background: #ffb36b;
+}
+
+
+/* =====================================
+   58 數字蠟燭
+===================================== */
+
+.number-candle {
+
+    position: absolute;
+
+    bottom: 180px;
+
+    z-index: 10;
+
+    width: 70px;
+
+    height: 105px;
+
+    background: #ffffff;
+
+    border: 5px solid #111111;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 58px;
+
+    font-weight: 900;
+
+    color: #111111;
+}
+
+
+.candle-5 {
+
+    left: 125px;
+}
+
+
+.candle-8 {
+
+    right: 125px;
+}
+
+
+/* 火焰 */
+
+.candle-flame {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: -48px;
+
+    transform:
+        translateX(-50%);
+
+    width: 25px;
+
+    height: 38px;
+
+    background: #ff8c42;
+
+    border: 4px solid #111111;
+
+    border-radius:
+        50% 50% 50% 50%;
+
+    opacity: 0;
+}
+
+
+.candle-flame.on {
+
+    opacity: 1;
+
+    animation:
+        flameFlicker 0.45s
+        infinite alternate;
+}
+
+
+@keyframes flameFlicker {
+
+    from {
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+    }
+
+    to {
+
+        transform:
+            translateX(-50%)
+            scale(1.15);
+
+    }
+}
+
+
+/* =====================================
+   打火機
+===================================== */
+
+.lighter {
+
+    position: absolute;
+
+    left: calc(50% + 190px);
+
+    bottom: 230px;
+
+    width: 55px;
+
+    height: 110px;
+
+    opacity: 0;
+
+    z-index: 20;
+}
+
+
+.lighter.show {
+
+    animation:
+        lighterMove 1.2s
+        ease-out
+        forwards;
+}
+
+
+@keyframes lighterMove {
+
+    0% {
+
+        transform:
+            translateX(180px);
+
+        opacity: 0;
+
+    }
+
+    100% {
+
+        transform:
+            translateX(0);
+
+        opacity: 1;
+
+    }
+}
+
+
+.lighter-body {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 45px;
+
+    height: 75px;
+
+    background: #111111;
+
+    border-radius: 6px;
+}
+
+
+.lighter-top {
+
+    position: absolute;
+
+    top: 25px;
+
+    left: 3px;
+
+    width: 39px;
+
+    height: 18px;
+
+    background: #777777;
+
+}
+
+
+.lighter-fire {
+
+    position: absolute;
+
+    left: 12px;
+
+    top: -8px;
+
+    width: 22px;
+
+    height: 35px;
+
+    background: #ff8c42;
+
+    border: 4px solid #111111;
+
+    border-radius: 50%;
+
+}
+
+
+/* =====================================
+   倒數
+===================================== */
+
+.countdown {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 10px;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 110px;
+
+    font-weight: 900;
+
+    color: #111111;
+
+    text-shadow:
+        7px 7px 0 #ffffff;
+
+    z-index: 30;
+
+}
+
+
+.countdown.pop {
+
+    animation:
+        numberPop 1s ease;
+}
+
+
+@keyframes numberPop {
+
+    0% {
+
+        transform:
+            translateX(-50%)
+            scale(0.3);
+
+        opacity: 0;
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            scale(1.3);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+        opacity: 1;
+
+    }
+}
+
+
+/* 吹氣 */
+
+.blow-text {
+
+    position: absolute;
+
+    top: 150px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 35px;
+
+    font-weight: bold;
+
+    color: #111111;
+
+    opacity: 0;
+
+    z-index: 40;
+}
+
+
+.blow-text.show {
+
+    animation:
+        blowAnimation 1s ease forwards;
+}
+
+
+@keyframes blowAnimation {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            scale(0.6);
+
+    }
+
+    40% {
+
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            scale(1.2);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            scale(1.4);
+
+    }
+}
+
+
+/* 第四頁文字 */
+
+.cake-message {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 0;
+
+    width: 100%;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+/* 蛋糕結束後按鈕 */
+
+.after-cake {
+
+    position: absolute;
+
+    bottom: -35px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.after-cake.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+/* =====================================
+   第五～第八頁
+   橘色底框＋黑色文字
+===================================== */
+
+.orange-box {
+    position: relative;
+
+    width: min(950px, 90vw);
+    min-height: 350px;
+
+    /* 橘色底框 */
+    background: #ff9b5c;
+
+    /* 黑色粗框 */
+    border: 7px solid #111111;
+
+    /* 馬賽克感 */
+    box-shadow:
+        13px 13px 0 #111111;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    padding: 60px;
+
+    overflow: hidden;
+}
+
+
+/* 橘色框裡增加馬賽克方格 */
+
+.orange-box::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            rgba(255,255,255,0.25) 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            -45deg,
+            rgba(233,79,123,0.18) 25%,
+            transparent 25%
+        );
+
+    background-size: 35px 35px;
+
+    pointer-events: none;
+}
+
+
+/* 頁碼 */
+
+.page-number {
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    color: #111111;
+
+    z-index: 2;
+}
+
+
+/* 文字 */
+
+.orange-text {
+    position: relative;
+
+    z-index: 2;
+
+    font-size:
+        clamp(25px, 3.4vw, 43px);
+
+    font-weight: bold;
+
+    line-height: 1.7;
+
+    color: #111111;
+
+    text-align: center;
+}
+
+
+/* 下一頁按鈕 */
+
+.dark-next {
+    position: relative;
+
+    z-index: 3;
+
+    margin-top: 30px;
+
+    padding: 13px 25px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    border: 4px solid #111111;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        6px 6px 0 #ffffff;
+
+    transition: 0.2s;
+}
+
+
+.dark-next:hover {
+    transform:
+        translate(-3px, -3px);
+
+    box-shadow:
+        10px 10px 0 #ffffff;
+}
+
+
+/* =====================================
+   第七頁
+   一樣使用橘色底框
+===================================== */
+
+#page7 .final-message {
+
+    position: relative;
+
+    width: min(950px, 90vw);
+
+    min-height: 350px;
+
+    background: #ff9b5c;
+
+    border: 7px solid #111111;
+
+    box-shadow:
+        13px 13px 0 #111111;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    padding: 60px;
+
+    overflow: hidden;
+}
+
+
+/* 第七頁馬賽克 */
+
+#page7 .final-message::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            rgba(255,255,255,0.25) 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            -45deg,
+            rgba(233,79,123,0.18) 25%,
+            transparent 25%
+        );
+
+    background-size: 35px 35px;
+
+    pointer-events: none;
+}
+
+
+.small-final {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 15px;
+
+    letter-spacing: 7px;
+
+    color: #111111;
+
+    font-weight: bold;
+
+    margin-bottom: 25px;
+}
+
+
+.final-text {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size:
+        clamp(32px, 5vw, 60px);
+
+    font-weight: bold;
+
+    line-height: 1.6;
+
+    color: #111111;
+
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+
+/* 第七頁按鈕 */
+
+#page7 .next-button {
+
+    position: relative;
+
+    z-index: 3;
+}
+
+
+/* =====================================
+   第八頁
+   橘色底框＋黑色文字
+===================================== */
+
+#page8 .ending {
+
+    position: relative;
+
+    width: min(950px, 90vw);
+
+    min-height: 350px;
+
+    background: #ff9b5c;
+
+    border: 7px solid #111111;
+
+    box-shadow:
+        13px 13px 0 #111111;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    padding: 60px;
+
+    overflow: hidden;
+}
+
+
+/* 第八頁馬賽克背景 */
+
+#page8 .ending::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            rgba(255,255,255,0.25) 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            -45deg,
+            rgba(233,79,123,0.18) 25%,
+            transparent 25%
+        );
+
+    background-size: 35px 35px;
+
+    pointer-events: none;
+}
+
+
+/* 第八頁愛心 */
+
+.ending-hearts {
+
+    position: relative;
+
+    z-index: 2;
+
+    color: #111111;
+
+    font-size: 45px;
+
+    letter-spacing: 15px;
+
+    animation:
+        heartbeat 1.3s infinite;
+
+    margin-bottom: 25px;
+}
+
+
+/* 第八頁「生日快樂」 */
+
+.ending-title {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size:
+        clamp(55px, 9vw, 100px);
+
+    font-weight: 900;
+
+    color: #111111;
+
+    text-shadow:
+        5px 5px 0 #ffffff;
+
+    margin-bottom: 20px;
+}
+
+
+/* 第八頁「我很愛您」 */
+
+.ending-text {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size:
+        clamp(35px, 5vw, 60px);
+
+    font-weight: bold;
+
+    color: #111111;
+
+    margin-bottom: 20px;
+}
+
+
+/* 英文 */
+
+.ending-small {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 15px;
+
+    letter-spacing: 7px;
+
+    color: #111111;
+}
+
+
+/* =====================================
+   手機版
+===================================== */
+
+@media (max-width: 700px) {
+
+    .orange-box,
+    #page7 .final-message,
+    #page8 .ending {
+
+        width: 82vw;
+
+        min-height: 300px;
+
+        padding: 35px 20px;
+
+    }
+
+
+    .orange-text {
+
+        font-size: 21px;
+
+    }
+
+
+    .final-text {
+
+        font-size: 28px;
+
+    }
+
+
+    .ending-title {
+
+        font-size: 55px;
+
+    }
+
+
+    .ending-text {
+
+        font-size: 35px;
+
+    }
+
+}
+  </style>
+
+  
+</head>
+<body>
+  <div class="mosaic-background">
+
+    <div class="heart heart-1">♥</div>
+    <div class="heart heart-2">♥</div>
+    <div class="heart heart-3">♥</div>
+    <div class="heart heart-4">♥</div>
+    <div class="heart heart-5">♥</div>
+    <div class="heart heart-6">♥</div>
+    <div class="heart heart-7">♥</div>
+    <div class="heart heart-8">♥</div>
+    <div class="heart heart-9">♥</div>
+    <div class="heart heart-10">♥</div>
+
+</div>
+
+
+<!-- =========================
+     第 1 頁
+========================= -->
+
+<section class="page active" id="page1">
+
+    <div class="birthday-card" id="birthdayCard">
+
+        <div class="pixel p-top-left"></div>
+        <div class="pixel p-top-right"></div>
+        <div class="pixel p-bottom-left"></div>
+        <div class="pixel p-bottom-right"></div>
+
+        <div class="mini-title">
+            A SPECIAL DAY
+        </div>
+
+        <h1>
+            HAPPY<br>
+            BIRTHDAY
+        </h1>
+
+        <div class="big-heart">
+            ♥
+        </div>
+
+        <div class="mom-name">
+            媽媽
+        </div>
+
+        <div class="open-card">
+            點一下打開生日卡
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     第 2 頁
+========================= -->
+
+<section class="page" id="page2">
+
+    <div class="question-box">
+
+        <div class="mini-title">
+            QUESTION 01
+        </div>
+
+        <h2>
+            媽媽，<br>
+            妳是不是很愛我們？
+        </h2>
+
+        <div class="choice-area">
+
+            <button
+                id="loveButton"
+                class="choice love">
+                ❤️ 愛
+            </button>
+
+            <button
+                id="noLoveButton"
+                class="choice no-love">
+                不愛
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     第 3 頁
+========================= -->
+
+<section class="page" id="page3">
+
+    <div class="message-card">
+
+        <div class="number-58">
+            58
+        </div>
+
+        <div class="main-message">
+            首先，先祝您58歲大壽生日快樂。
+        </div>
+
+        <button
+            id="goCakeButton"
+            class="next-button">
+            點一下進入下一頁 →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     第 4 頁
+========================= -->
+
+<section class="page" id="page4">
+
+    <div class="cake-stage">
+
+        <!-- 倒數 -->
+        <div
+            id="countdown"
+            class="countdown">
+        </div>
+
+
+        <!-- 吹蠟燭時的文字 -->
+        <div
+            id="blowText"
+            class="blow-text">
+        </div>
+
+
+        <!-- 蛋糕 -->
+        <div
+            id="cake"
+            class="cake">
+
+            <!-- 58 蠟燭 -->
+            <div class="number-candle candle-5">
+                5
+                <div class="candle-flame"></div>
+            </div>
+
+            <div class="number-candle candle-8">
+                8
+                <div class="candle-flame"></div>
+            </div>
+
+
+            <!-- 蛋糕上層 -->
+            <div class="cake-top">
+
+                <div class="cake-cream cream-1"></div>
+                <div class="cake-cream cream-2"></div>
+                <div class="cake-cream cream-3"></div>
+
+            </div>
+
+
+            <!-- 蛋糕本體 -->
+            <div class="cake-body">
+
+                <div class="cake-pixel cp1"></div>
+                <div class="cake-pixel cp2"></div>
+                <div class="cake-pixel cp3"></div>
+                <div class="cake-pixel cp4"></div>
+                <div class="cake-pixel cp5"></div>
+
+            </div>
+
+
+            <!-- 蛋糕盤 -->
+            <div class="cake-plate"></div>
+
+        </div>
+
+
+        <!-- 打火機 -->
+        <div
+            id="lighter"
+            class="lighter">
+
+            <div class="lighter-top"></div>
+            <div class="lighter-body"></div>
+            <div class="lighter-fire"></div>
+
+        </div>
+
+
+        <div
+            id="cakeMessage"
+            class="cake-message">
+            蛋糕來了 🎂
+        </div>
+
+
+        <!-- 第四頁結束後的按鈕 -->
+        <button
+            id="afterCakeButton"
+            class="next-button after-cake">
+            點一下繼續 →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     第 5 頁
+========================= -->
+
+<section class="page" id="page5">
+
+    <div class="orange-box">
+
+        <div class="page-number">
+            05
+        </div>
+
+        <div class="orange-text">
+            謝謝媽媽一直每天叫我起床、每天煮飯，
+            <br>
+            我上了高中有發現一件事。
+        </div>
+
+        <button
+            id="page5Button"
+            class="dark-next">
+            點一下繼續 →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     第 6 頁
+========================= -->
+
+<section class="page" id="page6">
+
+    <div class="orange-box">
+
+        <div class="page-number">
+            06
+        </div>
+
+        <div class="orange-text">
+            每天都回家有晚餐吃
+            <br>
+            是很幸福的事。
+        </div>
+
+        <button
+            id="page6Button"
+            class="dark-next">
+            點一下繼續 →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     第 7 頁
+========================= -->
+
+<section class="page" id="page7">
+
+    <div class="final-message">
+
+        <div class="small-final">
+            FOR MOM
+        </div>
+
+        <div class="final-text">
+            媽媽辛苦了，
+            <br>
+            我也有看到你一直在進步。
+        </div>
+
+        <button
+            id="page7Button"
+            class="next-button">
+            點一下繼續 →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     第 8 頁
+========================= -->
+
+<section class="page" id="page8">
+
+    <div class="ending">
+
+        <div class="ending-hearts">
+            ♥ ♥ ♥
+        </div>
+
+        <div class="ending-title">
+            生日快樂
+        </div>
+
+        <div class="ending-text">
+            我很愛您。
+        </div>
+
+        <div class="ending-small">
+            HAPPY BIRTHDAY, MOM
+        </div>
+
+    </div>
+
+</section>
+
+  <script>
+    window.addEventListener("load", function () {
+
+    /* =====================================
+       取得所有頁面
+    ===================================== */
+
+    var pages = document.querySelectorAll(".page");
+
+
+    /* =====================================
+       換頁
+    ===================================== */
+
+    function showPage(pageNumber) {
+
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove("active");
+        }
+
+        var target =
+            document.getElementById("page" + pageNumber);
+
+        if (target) {
+            target.classList.add("active");
+        }
+
+
+        /* 進入第四頁時開始蛋糕動畫 */
+
+        if (pageNumber === 4) {
+            startCakeShow();
+        }
+    }
+
+
+    /* =====================================
+       第 1 頁
+       點生日卡片 → 第 2 頁
+    ===================================== */
+
+    document
+        .getElementById("birthdayCard")
+        .addEventListener("click", function () {
+
+            showPage(2);
+
+        });
+
+
+    /* =====================================
+       第 2 頁
+       愛 → 第 3 頁
+    ===================================== */
+
+    document
+        .getElementById("loveButton")
+        .addEventListener("click", function () {
+
+            showPage(3);
+
+        });
+
+
+    /* =====================================
+       第 2 頁
+       不愛 → 完全沒有反應
+    ===================================== */
+
+    document
+        .getElementById("noLoveButton")
+        .addEventListener("click", function () {
+
+            /* 故意什麼都不做 */
+
+        });
+
+
+    /* =====================================
+       第 3 頁
+       → 第 4 頁
+    ===================================== */
+
+    document
+        .getElementById("goCakeButton")
+        .addEventListener("click", function () {
+
+            showPage(4);
+
+        });
+
+
+    /* =====================================
+       第 4 頁
+       蛋糕動畫
+    ===================================== */
+
+    function startCakeShow() {
+
+        var cake =
+            document.getElementById("cake");
+
+        var lighter =
+            document.getElementById("lighter");
+
+        var countdown =
+            document.getElementById("countdown");
+
+        var cakeMessage =
+            document.getElementById("cakeMessage");
+
+        var blowText =
+            document.getElementById("blowText");
+
+        var afterCakeButton =
+            document.getElementById("afterCakeButton");
+
+        var flames =
+            document.querySelectorAll(".candle-flame");
+
+
+        /* 重置 */
+
+        cake.classList.remove("show");
+
+        lighter.classList.remove("show");
+
+        countdown.classList.remove("pop");
+
+        countdown.innerText = "";
+
+        blowText.classList.remove("show");
+
+        afterCakeButton.classList.remove("show");
+
+        for (var i = 0; i < flames.length; i++) {
+            flames[i].classList.remove("on");
+        }
+
+
+        /* =========================
+           1. 蛋糕端出來
+        ========================= */
+
+        cakeMessage.innerText =
+            "蛋糕來了 🎂";
+
+        setTimeout(function () {
+
+            cake.classList.add("show");
+
+        }, 300);
+
+
+        /* =========================
+           2. 打火機出現
+        ========================= */
+
+        setTimeout(function () {
+
+            lighter.classList.add("show");
+
+            cakeMessage.innerText =
+                "幫媽媽點上蠟燭 🕯️";
+
+        }, 1900);
+
+
+        /* =========================
+           3. 蠟燭點燃
+        ========================= */
+
+        setTimeout(function () {
+
+            for (var i = 0; i < flames.length; i++) {
+
+                flames[i].classList.add("on");
+
+            }
+
+            cakeMessage.innerText =
+                "蠟燭點好了！";
+
+        }, 3200);
+
+
+        /* =========================
+           4. 倒數 3
+        ========================= */
+
+        setTimeout(function () {
+
+            showCountdown("3");
+
+        }, 4500);
+
+
+        /* =========================
+           5. 倒數 2
+        ========================= */
+
+        setTimeout(function () {
+
+            showCountdown("2");
+
+        }, 5500);
+
+
+        /* =========================
+           6. 倒數 1
+        ========================= */
+
+        setTimeout(function () {
+
+            showCountdown("1");
+
+        }, 6500);
+
+
+        /* =========================
+           7. 吹蠟燭
+        ========================= */
+
+        setTimeout(function () {
+
+            countdown.innerText = "";
+
+            blowText.innerText =
+                "呼～～～～～ 💨";
+
+            blowText.classList.add("show");
+
+            cakeMessage.innerText =
+                "生日蠟燭要熄滅囉！";
+
+        }, 7500);
+
+
+        /* =========================
+           8. 約 1 秒後熄滅
+        ========================= */
+
+        setTimeout(function () {
+
+            for (var i = 0; i < flames.length; i++) {
+
+                flames[i].classList.remove("on");
+
+            }
+
+            cakeMessage.innerText =
+                "生日快樂，媽媽 ❤️";
+
+        }, 8500);
+
+
+        /* =========================
+           9. 再過一點時間
+           出現下一頁按鈕
+        ========================= */
+
+        setTimeout(function () {
+
+            afterCakeButton.classList.add("show");
+
+        }, 9500);
+
+    }
+
+
+    /* =====================================
+       倒數數字
+    ===================================== */
+
+    function showCountdown(number) {
+
+        var countdown =
+            document.getElementById("countdown");
+
+
+        countdown.innerText =
+            number;
+
+
+        countdown.classList.remove("pop");
+
+
+        /* 強制重新播放動畫 */
+
+        void countdown.offsetWidth;
+
+
+        countdown.classList.add("pop");
+
+    }
+
+
+    /* =====================================
+       第 4 → 第 5
+    ===================================== */
+
+    document
+        .getElementById("afterCakeButton")
+        .addEventListener("click", function () {
+
+            showPage(5);
+
+        });
+
+
+    /* =====================================
+       第 5 → 第 6
+    ===================================== */
+
+    document
+        .getElementById("page5Button")
+        .addEventListener("click", function () {
+
+            showPage(6);
+
+        });
+
+
+    /* =====================================
+       第 6 → 第 7
+    ===================================== */
+
+    document
+        .getElementById("page6Button")
+        .addEventListener("click", function () {
+
+            showPage(7);
+
+        });
+
+
+    /* =====================================
+       第 7 → 第 8
+    ===================================== */
+
+    document
+        .getElementById("page7Button")
+        .addEventListener("click", function () {
+
+            showPage(8);
+
+        });
+
+});
+  </script>
+</body>
+</html>
